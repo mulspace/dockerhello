@@ -27,6 +27,7 @@ def catch_all(path):
 		'uid': os.getuid(),
 		'username': getpass.getuser(),
 		'home': os.environ['HOME'],
+	        'INSTANCE': os.getenv('INSTANCE', 'default')
 		})
 
 @app.route('/todo', methods=['GET'])
