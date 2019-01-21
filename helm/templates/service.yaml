@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: "{{ .Release.Name }}"
+  name: "{{ .Release.Name }}"
+  namespace: default
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: {{ .Values.service.nodePort }}
+    port: {{ .Values.service.port }}
+    protocol: TCP
+    targetPort: {{ .Values.container.port }}
+  selector:
+    run: "{{ .Release.Name }}"
+  sessionAffinity: None
+  type: {{ .Values.service.type }}
+status:
+  loadBalancer: {}
